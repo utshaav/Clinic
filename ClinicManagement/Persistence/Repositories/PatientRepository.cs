@@ -23,6 +23,11 @@ namespace ClinicManagement.Persistence.Repositories
             return _context.Patients.Include(c => c.Cities);
         }
 
+        public Patient GetPatient(string username)
+        {
+            return _context.Patients.Where(x => x.username == username).FirstOrDefault();
+        }
+
         /// <summary>
         /// /Get single patient
         /// </summary>

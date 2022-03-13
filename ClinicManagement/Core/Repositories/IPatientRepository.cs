@@ -9,6 +9,7 @@ namespace ClinicManagement.Core.Repositories
         IEnumerable<Patient> GetPatients();
         IEnumerable<Patient> GetRecentPatients();
         //IEnumerable<Patient> GetPatientByToken(string searchTerm = null);
+        Patient GetPatient(string username);
         Patient GetPatient(int id);
         //IQueryable<Patient> GetPatientQuery(string query);
         void Add(Patient patient);

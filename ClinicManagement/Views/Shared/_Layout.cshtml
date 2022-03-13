@@ -47,6 +47,11 @@
                             {
                                 @Html.Partial("_DoctorNav")
                             }
+                            @if (User.IsInRole(RoleName.PatientRoleName))
+                            {
+                                @Html.Partial("_PatientNav")
+                            }
+
                         </div>
                        
                     </div>

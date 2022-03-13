@@ -21,7 +21,7 @@ namespace ClinicManagement.Core.ViewModel
 
         [Required]
         public int Specialization { get; set; }
-        [Required]
+
         public List<int> AvailableDays { get; set; }
 
 

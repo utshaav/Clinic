@@ -18,6 +18,7 @@ namespace ClinicManagement.Core.Models
         public DateTime DateTime { get; set; }
         public string Height { get; set; }
         public string Weight { get; set; }
+        public string username { get; set; }
 
         public int Age
         {

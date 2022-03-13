@@ -17,7 +17,17 @@ namespace ClinicManagement.Controllers
 
         public ActionResult Index()
         {
+            var isPatient = HttpContext.User.IsInRole(RoleName.PatientRoleName);
             var appointments = _unitOfWork.Appointments.GetAppointments();
+            ViewBag.IsPatient = isPatient;
+            if (isPatient)
+            {
+                var name = HttpContext.User.Identity.Name;
+                var patient = _unitOfWork.Patients.GetPatient(name);
+                appointments = appointments.Where(x => x.PatientId == patient.Id);
+                //appointments = appointments.Where( x => x)
+            }
+
             return View(appointments);
         }
 

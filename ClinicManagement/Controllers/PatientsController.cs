@@ -7,7 +7,7 @@ using ClinicManagement.Core.ViewModel;
 
 namespace ClinicManagement.Controllers
 {
-    [Authorize(Roles = RoleName.DoctorRoleName + "," + RoleName.AdministratorRoleName)]
+    [Authorize(Roles = RoleName.DoctorRoleName + "," + RoleName.AdministratorRoleName + "," + RoleName.PatientRoleName)]
     public class PatientsController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -22,8 +22,15 @@ namespace ClinicManagement.Controllers
         }
 
 
-        public ActionResult Details(int id)
+        public ActionResult Details(int id = 0)
         {
+            bool isPatient = HttpContext.User.IsInRole(RoleName.PatientRoleName);
+            ViewBag.IsPatient = isPatient;
+            if (id==0 || isPatient)
+            {
+                string username = HttpContext.User.Identity.Name;
+                id = _unitOfWork.Patients.GetPatient(username).Id;
+            }
             var viewModel = new PatientDetailViewModel()
             {
                 Patient = _unitOfWork.Patients.GetPatient(id),
@@ -45,6 +52,16 @@ namespace ClinicManagement.Controllers
             {
                 Cities = _unitOfWork.Dropdowns.GetCities(),
                 Heading = "New Patient"
+            };
+            return View("PatientForm", viewModel);
+        }
+
+        public ActionResult Register()
+        {
+            var viewModel = new PatientFormViewModel
+            {
+                Cities = _unitOfWork.Dropdowns.GetCities(),
+                Heading = "Register"
             };
             return View("PatientForm", viewModel);
         }

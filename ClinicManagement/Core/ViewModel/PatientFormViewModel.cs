@@ -34,6 +34,7 @@ namespace ClinicManagement.Core.ViewModel
         public DateTime Date { get; set; }
 
         public string Heading { get; set; }
+        public bool IsAdminLoggedIn { get; set; } = true;
 
         public DateTime GetBirthDate()
         {
@@ -44,6 +45,8 @@ namespace ClinicManagement.Core.ViewModel
         }
 
         public IEnumerable<City> Cities { get; set; }
+
+        public RegisterViewModel RegisterViewModel { get; set; }
 
 
 

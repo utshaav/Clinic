@@ -4,6 +4,7 @@ using ClinicManagement.Core.ViewModel;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using System;
 using System.Linq;
 using System.Net;
 using System.Security.Claims;
@@ -232,6 +233,66 @@ namespace ClinicManagement.Controllers
 
             viewModel.Specializations = _unitOfWork.Dropdowns.GetSpecializations();
 
+            // If we got this far, something failed, redisplay form
+            return View("DoctorForm", viewModel);
+        }
+
+        [AllowAnonymous]
+        public ActionResult RegisterPatient()
+        {
+            var viewModel = new PatientFormViewModel
+            {
+                Cities = _unitOfWork.Dropdowns.GetCities(),
+                Heading = "Register",
+                IsAdminLoggedIn = false
+            };
+            return View("PatientForm", viewModel);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RegisterPatient(PatientFormViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser()
+                {
+                    UserName = viewModel.RegisterViewModel.Email,
+                    Email = viewModel.RegisterViewModel.Email,
+                    IsActive = true
+                };
+                var result = await UserManager.CreateAsync(user, viewModel.RegisterViewModel.Password);
+
+                if (result.Succeeded)
+                {
+
+                    UserManager.AddToRole(user.Id, RoleName.PatientRoleName);
+
+
+                    var patient = new Patient
+                    {
+                        Name = viewModel.Name,
+                        Phone = viewModel.Phone,
+                        Address = viewModel.Address,
+                        DateTime = DateTime.Now,
+                        BirthDate = viewModel.GetBirthDate(),
+                        Height = viewModel.Height,
+                        Weight = viewModel.Weight,
+                        CityId = viewModel.City,
+                        Sex = viewModel.Sex,
+                        Token = (2018 + _unitOfWork.Patients.GetPatients().Count()).ToString().PadLeft(7, '0'),
+                        username = user.UserName,
+                    };
+                    UserManager.AddClaim(user.Id, new Claim(ClaimTypes.GivenName, patient.Name));
+                    //Mapper.Map<DoctorFormViewModel, Doctor>(model, doctor);
+                    _unitOfWork.Patients.Add(patient);
+                    _unitOfWork.Complete();
+                    return RedirectToAction("Index", "Doctors");
+                }
+
+                this.AddErrors(result);
+            }
             // If we got this far, something failed, redisplay form
             return View("DoctorForm", viewModel);
         }
