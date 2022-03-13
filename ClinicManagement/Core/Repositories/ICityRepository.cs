@@ -7,4 +7,11 @@ namespace ClinicManagement.Core.Repositories
     {
         IEnumerable<City> GetCities();
     }
+    public interface IDropdownRepository
+    {
+        IEnumerable<City> GetCities();
+        IEnumerable<Specialization> GetSpecializations();
+        IEnumerable<Days> GetDays();
+
+    }
 }

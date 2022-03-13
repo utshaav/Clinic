@@ -13,6 +13,8 @@ namespace ClinicManagement.Persistence
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Specialization> Specializations { get; set; }
         public DbSet<City> Cities { get; set; }
+        public DbSet<Days> Days { get; set; }
+        public DbSet<AvailableDays> AvailableDays {get; set;}
         //public DbSet<PatientStatus> PatientStatus { get; set; }
 
 
@@ -34,6 +36,7 @@ namespace ClinicManagement.Persistence
             modelBuilder.Configurations.Add(new AttendanceConfiguration());
             modelBuilder.Configurations.Add(new SpecializationConfiguration());
             modelBuilder.Configurations.Add(new CityConfiguration());
+            //modelBuilder.Configurations.Add(new CityConfiguration());
             //modelBuilder.Configurations.Add(new PatientStatusConfiguration());
             base.OnModelCreating(modelBuilder);
         }

@@ -246,6 +246,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AppointmentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Core\Models\AvalilableDays.cs" />
     <Compile Include="Core\ViewModel\AppointmentSearchVM.cs" />
     <Compile Include="Controllers\DoctorsController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
@@ -261,6 +262,10 @@
     <Compile Include="Migrations\202203130331189_InitialDb.Designer.cs">
       <DependentUpon>202203130331189_InitialDb.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202203131517405_Added Some Tables.cs" />
+    <Compile Include="Migrations\202203131517405_Added Some Tables.Designer.cs">
+      <DependentUpon>202203131517405_Added Some Tables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\EntityConfigurations\AppointmentConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\CityConfiguration.cs" />
@@ -270,12 +275,13 @@
     <Compile Include="Persistence\EntityConfigurations\SpecializationConfiguration.cs" />
     <Compile Include="Core\Helpers\ClinicMgtHelpers.cs" />
     <Compile Include="Core\Helpers\EnumHelpers.cs" />
-    <Compile Include="Core\Models\City.cs" />
+    <Compile Include="Core\Models\Dropdown.cs" />
     <Compile Include="Core\Models\Gender.cs" />
     <Compile Include="Core\Models\RoleName.cs" />
     <Compile Include="Core\Models\PatientStatus.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Persistence\Repositories\AppointmentRepository.cs" />
+    <Compile Include="Persistence\Repositories\DropdownRepository.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
     <Compile Include="Persistence\Repositories\ApplicationUserRepository.cs" />
     <Compile Include="Persistence\Repositories\CityRepository.cs" />
@@ -1119,6 +1125,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\DropdownRepository\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
@@ -1129,6 +1136,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202203130331189_InitialDb.resx">
       <DependentUpon>202203130331189_InitialDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203131517405_Added Some Tables.resx">
+      <DependentUpon>202203131517405_Added Some Tables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

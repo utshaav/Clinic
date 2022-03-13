@@ -21,9 +21,13 @@ namespace ClinicManagement.Core.ViewModel
 
         [Required]
         public int Specialization { get; set; }
+        [Required]
+        public List<int> AvailableDays { get; set; }
+
 
         public IEnumerable<Specialization> Specializations { get; set; }
         public IEnumerable<Doctor> Doctors { get; set; }
+        public IEnumerable<Days> Days { get; set; }
 
         public RegisterViewModel RegisterViewModel { get; set; }
 

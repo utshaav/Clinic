@@ -185,7 +185,7 @@ namespace ClinicManagement.Controllers
         {
             var viewModel = new DoctorFormViewModel()
             {
-                Specializations = _unitOfWork.Specializations.GetSpecializations()
+                Specializations = _unitOfWork.Dropdowns.GetSpecializations()
                 // Doctors = _doctorRepository.GetDectors()
             };
             return View("DoctorForm", viewModel);
@@ -230,7 +230,7 @@ namespace ClinicManagement.Controllers
                 this.AddErrors(result);
             }
 
-            viewModel.Specializations = _unitOfWork.Specializations.GetSpecializations();
+            viewModel.Specializations = _unitOfWork.Dropdowns.GetSpecializations();
 
             // If we got this far, something failed, redisplay form
             return View("DoctorForm", viewModel);

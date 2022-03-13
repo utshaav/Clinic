@@ -56,7 +56,8 @@ namespace ClinicManagement.Controllers
                 Address = doctor.Address,
                 IsAvailable = doctor.IsAvailable,
                 Specialization = doctor.SpecializationId,
-                Specializations = _unitOfWork.Specializations.GetSpecializations()
+                Specializations = _unitOfWork.Dropdowns.GetSpecializations(),
+                Days = _unitOfWork.Dropdowns.GetDays()
 
             };
             return View(viewModel);
@@ -64,10 +65,10 @@ namespace ClinicManagement.Controllers
 
         [HttpPost]
         public ActionResult Edit(DoctorFormViewModel viewModel)
-        {
+        {   
             if (!ModelState.IsValid)
             {
-                viewModel.Specializations = _unitOfWork.Specializations.GetSpecializations();
+                viewModel.Specializations = _unitOfWork.Dropdowns.GetSpecializations();
                 return View(viewModel);
             }
 

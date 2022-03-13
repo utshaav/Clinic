@@ -43,7 +43,7 @@ namespace ClinicManagement.Controllers
         {
             var viewModel = new PatientFormViewModel
             {
-                Cities = _unitOfWork.Cities.GetCities(),
+                Cities = _unitOfWork.Dropdowns.GetCities(),
                 Heading = "New Patient"
             };
             return View("PatientForm", viewModel);
@@ -56,7 +56,7 @@ namespace ClinicManagement.Controllers
         {
             if (!ModelState.IsValid)
             {
-                viewModel.Cities = _unitOfWork.Cities.GetCities();
+                viewModel.Cities = _unitOfWork.Dropdowns.GetCities();
                 return View("PatientForm", viewModel);
 
             }
@@ -102,7 +102,7 @@ namespace ClinicManagement.Controllers
                 Weight = patient.Weight,
                 Sex = patient.Sex,
                 City = patient.CityId,
-                Cities = _unitOfWork.Cities.GetCities()
+                Cities = _unitOfWork.Dropdowns.GetCities()
             };
             return View("PatientForm", viewModel);
         }
@@ -113,7 +113,7 @@ namespace ClinicManagement.Controllers
         {
             if (!ModelState.IsValid)
             {
-                viewModel.Cities = _unitOfWork.Cities.GetCities();
+                viewModel.Cities = _unitOfWork.Dropdowns.GetCities();
                 return View("PatientForm", viewModel);
             }
 

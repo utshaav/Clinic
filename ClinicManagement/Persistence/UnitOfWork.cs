@@ -11,9 +11,11 @@ namespace ClinicManagement.Persistence
         public IAppointmentRepository Appointments { get; private set; }
         public IAttendanceRepository Attandences { get; private set; }
         public ICityRepository Cities { get; private set; }
+        public IDropdownRepository Dropdown { get; private set; }
         public IDoctorRepository Doctors { get; private set; }
         public ISpecializationRepository Specializations { get; private set; }
         public IApplicationUserRepository Users { get; private set; }
+        public IDropdownRepository Dropdowns { get; private set; }
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -25,6 +27,9 @@ namespace ClinicManagement.Persistence
             Doctors = new DoctorRepository(context);
             Specializations = new SpecializationRepository(context);
             Users = new ApplicationUserRepository(context);
+            Dropdowns = new DropdownRepository(context);
+
+
 
         }
 
