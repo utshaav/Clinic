@@ -46,8 +46,15 @@ namespace ClinicManagement.Controllers
         //    return View(viewModel);
         //}
 
-        public ActionResult Create(int id)
+        public ActionResult Create(int id = 0)
         {
+            bool isPatient = HttpContext.User.IsInRole(RoleName.PatientRoleName);
+            ViewBag.IsPatient = isPatient;
+            if (id == 0 || isPatient)
+            {
+                string username = HttpContext.User.Identity.Name;
+                id = _unitOfWork.Patients.GetPatient(username).Id;
+            }
             var viewModel = new AppointmentFormViewModel
             {
                 Patient = id,

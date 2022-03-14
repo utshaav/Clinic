@@ -94,6 +94,10 @@ namespace ClinicManagement.Controllers
 
             _unitOfWork.Patients.Add(patient);
             _unitOfWork.Complete();
+            if (HttpContext.User.IsInRole(RoleName.PatientRoleName))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return RedirectToAction("Index", "Patients");
 
             // TODO: BUG redirect to detail 
@@ -147,8 +151,12 @@ namespace ClinicManagement.Controllers
             patientInDb.CityId = viewModel.City;
 
             _unitOfWork.Complete();
-            return RedirectToAction("Index", "Patients")
-;
+            if (HttpContext.User.IsInRole(RoleName.PatientRoleName))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return RedirectToAction("Index", "Patients");
+
         }
 
 

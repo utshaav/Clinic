@@ -3,6 +3,7 @@ using ClinicManagement.Persistence;
 using System.Linq;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using ClinicManagement.Core.Models;
 
 namespace ClinicManagement.Controllers
 {
@@ -30,6 +31,13 @@ namespace ClinicManagement.Controllers
         public ActionResult TotalAppointments()
         {
             var appointments = _context.Appointments.ToList();
+            if (HttpContext.User.IsInRole(RoleName.PatientRoleName))
+            {
+                string username = HttpContext.User.Identity.Name;
+                int userId = _context.Patients.Where(x => x.username == username).FirstOrDefault().Id;
+                appointments = appointments.Where(x => x.Id == userId).ToList();
+            }
+
             return Json(appointments.Count(), JsonRequestBehavior.AllowGet);
         }
 
@@ -59,6 +67,12 @@ namespace ClinicManagement.Controllers
             var appointments = _context.Appointments
                 .Where(a => a.StartDateTime >= today)
                 .ToList();
+            if (HttpContext.User.IsInRole(RoleName.PatientRoleName))
+            {
+                string username = HttpContext.User.Identity.Name;
+                int userId = _context.Patients.Where(x => x.username == username).FirstOrDefault().Id;
+                appointments = appointments.Where(x => x.Id == userId).ToList();
+            }
             return Json(appointments.Count(), JsonRequestBehavior.AllowGet);
         }
         //Available doctors

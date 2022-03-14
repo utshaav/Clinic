@@ -677,6 +677,11 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\timepicker\JavaScript.js" />
+    <Content Include="Content\timepicker\jquery.timepicker.css" />
+    <Content Include="Content\timepicker\jquery.timepicker.js" />
+    <Content Include="Content\timepicker\jquery.timepicker.min.css" />
+    <Content Include="Content\timepicker\jquery.timepicker.min.js" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
     <Content Include="favicon.ico" />
