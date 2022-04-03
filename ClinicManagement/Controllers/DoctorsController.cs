@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
 using ClinicManagement.Core;
 using ClinicManagement.Core.ViewModel;
 using Microsoft.AspNet.Identity;
@@ -47,6 +49,7 @@ namespace ClinicManagement.Controllers
         {
             var doctor = _unitOfWork.Doctors.GetDoctor(id);
             if (doctor == null) return HttpNotFound();
+            List<string> availableDays = doctor.AvailableDays != null ? doctor.AvailableDays.Split(',').ToList() : new List<string>();
             var viewModel = new DoctorFormViewModel()
             {
 
@@ -57,7 +60,11 @@ namespace ClinicManagement.Controllers
                 IsAvailable = doctor.IsAvailable,
                 Specialization = doctor.SpecializationId,
                 Specializations = _unitOfWork.Dropdowns.GetSpecializations(),
-                Days = _unitOfWork.Dropdowns.GetDays()
+                Days = _unitOfWork.Dropdowns.GetDays(),
+                AvailableDays = availableDays,
+                TimeFrom = doctor.TimeFrom,
+                TimeTo = doctor.TimeTo
+                
 
             };
             return View(viewModel);
@@ -79,6 +86,9 @@ namespace ClinicManagement.Controllers
             doctorInDb.Address = viewModel.Address;
             doctorInDb.IsAvailable = viewModel.IsAvailable;
             doctorInDb.SpecializationId = viewModel.Specialization;
+            doctorInDb.AvailableDays = string.Join(",", viewModel.AvailableDays);
+            doctorInDb.TimeFrom = viewModel.TimeFrom;
+            doctorInDb.TimeTo = viewModel.TimeTo;
 
             _unitOfWork.Complete();
 

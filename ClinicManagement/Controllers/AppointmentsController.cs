@@ -50,7 +50,7 @@ namespace ClinicManagement.Controllers
         {
             bool isPatient = HttpContext.User.IsInRole(RoleName.PatientRoleName);
             ViewBag.IsPatient = isPatient;
-            if (id == 0 || isPatient)
+            if (id == 0 && isPatient)
             {
                 string username = HttpContext.User.Identity.Name;
                 id = _unitOfWork.Patients.GetPatient(username).Id;

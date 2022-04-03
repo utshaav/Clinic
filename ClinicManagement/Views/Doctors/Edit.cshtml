@@ -12,6 +12,7 @@
                 <h3>Edit Doctor </h3>
                 <div class="clearfix"></div>
             </div>
+            <span hidden id="avDays" data="@string.Join(",",Model.AvailableDays)"> </span>
             <div class="x_content">
                 <div class="form-horizontal form-label-left">
                     @using (Html.BeginForm())
@@ -50,11 +51,22 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3 col-xs-12">Available Days</label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                @Html.DropDownListFor(m => m.AvailableDays, new SelectList(Model.Days, "Id", "Name"), "", new { @class = "form-control selectpicker ", @multiple = true })
+                                @Html.DropDownListFor(m => m.AvailableDays, new SelectList(Model.Days, "Id", "Name"), "", new { @class = "form-control selectpicker ", @multiple = true, @id = "multipleSelect" })
                                 @Html.ValidationMessageFor(m => m.AvailableDays)
                             </div>
                         </div>
-
+                        <div class="form-group">
+                            <label class="control-label col-sm-3 col-xs-12">From</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                               @Html.TextBoxFor(m => m.TimeFrom, new { @type = "time" } )
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3 col-xs-12">To</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.TextBoxFor(m => m.TimeTo, new { @type = "time" })
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label class="control-label col-sm-3 col-xs-12">Status</label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -85,5 +97,15 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+<script>
+    debugger
+    var data = $('#avDays').attr('data');
+    var dataList = data.split(",");
+    $('#multipleSelect').val(dataList).prop('selected', true);
+    //data.foreach(function (e) {
+
+    //    $('#multipleSelect').val(e).trigger("change");
+    //});
+</script>
 
 

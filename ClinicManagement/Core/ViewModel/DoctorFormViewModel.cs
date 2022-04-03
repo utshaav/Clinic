@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using ClinicManagement.Core.Models;
 
@@ -22,8 +23,9 @@ namespace ClinicManagement.Core.ViewModel
         [Required]
         public int Specialization { get; set; }
 
-        public List<int> AvailableDays { get; set; }
-
+        public List<string> AvailableDays { get; set; }
+        public string TimeFrom { get; set; }
+        public string TimeTo { get; set; }
 
         public IEnumerable<Specialization> Specializations { get; set; }
         public IEnumerable<Doctor> Doctors { get; set; }

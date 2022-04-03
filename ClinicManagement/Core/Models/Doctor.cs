@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace ClinicManagement.Core.Models
@@ -15,6 +16,9 @@ namespace ClinicManagement.Core.Models
         public string PhysicianId { get; set; }
         public ApplicationUser Physician { get; set; }
         public ICollection<Appointment> Appointments { get; set; }
+        public string AvailableDays { get; set; }
+        public string TimeFrom { get; set; }
+        public string TimeTo { get; set; }
         public Doctor()
         {
             Appointments = new Collection<Appointment>();
