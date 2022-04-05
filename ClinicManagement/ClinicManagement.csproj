@@ -1206,11 +1206,12 @@
     <Content Include="Views\Attendances\_AttendancePartial.cshtml" />
     <Content Include="Views\Doctors\DoctorProfile.cshtml" />
     <Content Include="Views\Shared\_PatientNav.cshtml" />
+    <Content Include="Views\ML\ListOfDiseases.cshtml" />
+    <Content Include="Views\ML\Predict.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\DropdownRepository\" />
-    <Folder Include="Views\ML\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

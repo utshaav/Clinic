@@ -1,0 +1,10 @@
+﻿@model Dictionary<string, int>
+
+@foreach (var item in Model)
+{
+    <div class="col-xs-6 col-lg-3 col-md-3 ">
+        <input type="checkbox" value="@item.Key" name="@item.Key" />
+        <label for="@item.Key">@item.Key.Replace("_", " ")</label>
+    </div>
+}
+

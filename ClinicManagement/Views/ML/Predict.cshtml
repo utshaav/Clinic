@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Predict";
+}
+
+<h2>Predict</h2>
+
+<div class="row" id="items"></div>
+<button id="fetchMore_btn" onclick="getOtherOption()" data-index="0">Fetch More</button>
+<button id="showResult" onclick="predictDisease()" class="hide">Show Result</button>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function () {
+        getOtherOption();
+    })
+
+    function getOtherOption() {
+        debugger
+        var index = Number($("#fetchMore_btn").attr('data-index'));
+        $.ajax({
+            url: "/ML/ListOfDiseases?index=" + index,
+            success: function (result) {
+                $('#items').append(result)
+                index = index + 100;
+                $("#fetchMore_btn").attr('data-index', index);
+                if (index > 133) {
+                    $("#fetchMore_btn").addClass('hide');
+                    $("#showResult").removeClass('hide');
+                }
+            }
+        })
+    }
+
+    function predictDisease() {
+        debugger;
+        var symptoms = [];
+        $.each($("input[type='checkbox']:checked"), function () {
+            symptoms.push($(this).val());
+        });
+        //$.ajax({
+        //    url: '/ML/Predict
+
+        //    data: JSON.stringify({ 'symptoms': symptoms }),
+        //})
+        $.post("/ML/Predict",
+            {
+                symptoms: symptoms
+            },
+        );
+    }
+</script>
