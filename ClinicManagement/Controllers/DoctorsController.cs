@@ -41,6 +41,7 @@ namespace ClinicManagement.Controllers
             SearchViewModel searchViewModel = new SearchViewModel();
             searchViewModel.RecommendedDoctors = _unitOfWork.Doctors.GetDoctorBySpecialization(specialization);
             searchViewModel.AllDoctors = _unitOfWork.Doctors.GetAvailableDoctors().ToList();
+            searchViewModel.RequiredSpecialization = specialization;
             //var viewModel = new DoctorDetailViewModel
             //{
             //    ,

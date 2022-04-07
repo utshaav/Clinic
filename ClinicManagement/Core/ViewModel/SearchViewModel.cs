@@ -11,5 +11,6 @@ namespace ClinicManagement.Core.ViewModel
         public List<Doctor> RecommendedDoctors { get; set; }
         public List<Doctor> AllDoctors { get; set; }
         public List<Doctor> FeaturedDoctors { get; set; }
+        public string RequiredSpecialization { get; set; }
     }
 }

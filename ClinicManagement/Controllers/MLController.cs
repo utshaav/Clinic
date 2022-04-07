@@ -29,16 +29,6 @@ namespace ClinicManagement.Controllers
                 { "Dermatologist", new List<string>{ "Fungal infection", "Varicose veins", "Acne", "Psoriasis", "Impetigo" }}
 
             };
-//            General Physician
-//Gastroenterologist
-//Endocrinologist
-//Pulmonologist
-//Cardiologist
-//Neurologist
-//Hepatologist
-//Proctologist
-//Rheumatologist
-//Urologists
         }
         // GET: ML
         public ActionResult ListOfDiseases(int? index)
@@ -89,7 +79,7 @@ namespace ClinicManagement.Controllers
                     bool flag = false;
                     foreach (var value in item.Value)
                     {
-                        if (value.ToLower() == modelOutput.Prediction.ToLower())
+                        if (value.ToLower() == modelOutput.Prediction.Trim().ToLower())
                         {
                             specialization = item.Key;
                             flag = true;

@@ -3,11 +3,21 @@
     ViewBag.Title = "SearchDoctor";
 }
 
-<h2>Search Doctor</h2>
+<style>
+    .space {
+        height: 10px;
+        width: 100%;
+    }
+</style>
+
+<h2>Doctor result</h2>
+<div class="space"></div>
+<div class="space"></div>
 
 @if (Model != null && Model.RecommendedDoctors.Count > 0)
 {
     <h3>Recommended Doctors</h3>
+    <div class="space"></div>
     <div class="row">
         @foreach (var item in Model.RecommendedDoctors)
         {
@@ -24,14 +34,20 @@
         }
     </div>
 }
-else if (true)
+else if (Model != null && Model.RequiredSpecialization != null)
 {
-    <p>There is no __________ doctor available</p>
+    <h3>Recommended Doctors</h3>
+    <div class="space"></div>
+    <p>Sorry, currently, we dont have any @Model.RequiredSpecialization, Please consult with @Model.RequiredSpecialization for your symptoms. </p>
 }
 
 @if (Model != null && Model.AllDoctors.Count > 0)
 {
+    <div class="space"></div>
+    <div class="space"></div>
+    <div class="space"></div>
     <h3>All Doctors</h3>
+    <div class="space"></div>
     <div class="row">
         @foreach (var item in Model.AllDoctors)
         {
