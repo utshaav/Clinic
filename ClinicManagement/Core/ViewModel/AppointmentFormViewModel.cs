@@ -37,6 +37,8 @@ namespace ClinicManagement.Core.ViewModel
 
         public IEnumerable<Appointment> Appointments { get; set; }
 
+        public int SelectedDoctor { get; set; }
+
 
         public DateTime GetStartDateTime()
         {

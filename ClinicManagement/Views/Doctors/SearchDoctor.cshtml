@@ -27,7 +27,7 @@
                     <div class="card-body">
                         <h5 class="card-title">@item.Name</h5>
                         <p class="card-text">@item.Specialization.Name</p>
-                        <a href="#" class="btn btn-primary">Book Appointment</a>
+                        <a href="/Appointments/Create?doctorId=@item.Id" class="btn btn-primary">Book Appointment</a>
                     </div>
                 </div>
             </div>
@@ -57,7 +57,7 @@ else if (Model != null && Model.RequiredSpecialization != null)
                     <div class="card-body">
                         <h5 class="card-title">@item.Name</h5>
                         <p class="card-text">@item.Specialization.Name</p>
-                        <a href="#" class="btn btn-primary">Book Appointment</a>
+                        <a href="/Appointments/Create?doctorId=@item.Id" class="btn btn-primary">Book Appointment</a>
                     </div>
                 </div>
             </div>

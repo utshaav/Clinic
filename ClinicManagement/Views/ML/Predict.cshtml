@@ -3,7 +3,9 @@
     ViewBag.Title = "Predict";
 }
 
-<h2>Predict</h2>
+<h2>Select all the symptoms you are facing</h2>
+<br/>
+<p>Please take your time to select the symptoms for accurate recommendation.</p>
 
 <div class="row" id="items"></div>
 <button id="fetchMore_btn" onclick="getOtherOption()" data-index="0">Fetch More</button>
@@ -22,7 +24,7 @@
             url: "/ML/ListOfDiseases?index=" + index,
             success: function (result) {
                 $('#items').append(result)
-                index = index + 100;
+                index = index + 40;
                 $("#fetchMore_btn").attr('data-index', index);
                 if (index > 133) {
                     $("#fetchMore_btn").addClass('hide');

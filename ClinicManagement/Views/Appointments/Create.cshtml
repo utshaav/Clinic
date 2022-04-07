@@ -1,6 +1,7 @@
 ﻿@model ClinicManagement.Core.ViewModel.AppointmentFormViewModel
 @{
     ViewBag.Title = Model.Heading;
+    var role = User.IsInRole("Patient");
 }
 <link href="~/Content/gridDoctor.css" rel="stylesheet" />
 @using (Html.BeginForm("Create", "Appointments", FormMethod.Post, new { @class = "form-horizontal form-label-left", autocomplete = "off" }))
@@ -11,6 +12,7 @@
     @*@Html.HiddenFor(m => m.Doctor)*@
     @Html.HiddenFor(m => m.Patient)
     <div class="row">
+        <span id="selectedDoctor" isPatient="@role" data-value="@Model.SelectedDoctor" hidden></span>
         <div class="col-md-6 col-xs-12">
             <div class="x_panel">
                 <div class="x_content">
@@ -95,6 +97,7 @@
             $('#divAppointments').hide();
 
             var URL = '/appointments/DoctorsList/';
+            var initial = 0;
             $.getJSON(URL, function (data) {
                 var items = '<option value="">Select Doctor</option>';
                 $.each(data, function (i, doctor) {
@@ -118,6 +121,10 @@
                 .success(function (result) {
                     $('#divAppointments').show();
                     $('#divAppointments').html(result);
+                    if (initial === 0) {
+                        $('#DoctorID').val($('#selectedDoctor').attr('data-value')).change();
+                        initial = 1;
+                    }
                 })
                 .error(function (xhr, status) {
                     alert(status);
@@ -125,7 +132,12 @@
 
             });
 
-
+            if ($('#selectedDoctor').attr('data-value') != 0) {
+                $('#DoctorID').val($('#selectedDoctor').attr('data-value')).change();
+            } else {
+                initial = 1;
+            }
+            debugger;
         });
 
         $('.date').datepicker({

@@ -43,7 +43,7 @@ namespace ClinicManagement.Controllers
                 lstStr.Add(prop.Name, j);
                 j++;
             }
-            int max = i + 20;
+            int max = i + 40;
             lstStr = lstStr.Where(x => x.Value >= i && x.Value < max).ToDictionary(t => t.Key, t => t.Value);
             return PartialView(lstStr);
         }
