@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using ClinicManagement.Core;
+using ClinicManagement.Core.Models;
 using ClinicManagement.Core.ViewModel;
 using Microsoft.AspNet.Identity;
 
@@ -33,6 +34,20 @@ namespace ClinicManagement.Controllers
                 Appointments = _unitOfWork.Appointments.GetAppointmentByDoctor(id),
             };
             return View(viewModel);
+        }
+
+        public ActionResult SearchDoctor(string specialization)
+        {
+            SearchViewModel searchViewModel = new SearchViewModel();
+            searchViewModel.RecommendedDoctors = _unitOfWork.Doctors.GetDoctorBySpecialization(specialization);
+            searchViewModel.AllDoctors = _unitOfWork.Doctors.GetAvailableDoctors().ToList();
+            //var viewModel = new DoctorDetailViewModel
+            //{
+            //    ,
+            //    UpcomingAppointments = _unitOfWork.Appointments.GetTodaysAppointments(id),
+            //    Appointments = _unitOfWork.Appointments.GetAppointmentByDoctor(id),
+            //};
+            return View(searchViewModel);
         }
 
         public ActionResult DoctorProfile()

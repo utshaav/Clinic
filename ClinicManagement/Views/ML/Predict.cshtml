@@ -38,15 +38,29 @@
         $.each($("input[type='checkbox']:checked"), function () {
             symptoms.push($(this).val());
         });
-        //$.ajax({
-        //    url: '/ML/Predict
+        $('#showResult').attr('disabled', 'true');
 
-        //    data: JSON.stringify({ 'symptoms': symptoms }),
-        //})
-        $.post("/ML/Predict",
-            {
-                symptoms: symptoms
-            },
-        );
+        $.ajax({
+            url: "/ML/PredictAsync",
+            method: "post",
+            data: { symptoms: symptoms,},
+            success: function (result) {
+                $('body').html(result)
+                //index = index + 100;
+                //$("#fetchMore_btn").attr('data-index', index);
+                //if (index > 133) {
+                //    $("#fetchMore_btn").addClass('hide');
+                //    $("#showResult").removeClass('hide');
+                //}
+            }
+        })
+        //$.post("/ML/PredictAsync",
+        //    {
+        //        symptoms: symptoms,
+        //        success: function (data) {
+
+        //        }
+        //    },
+        //);
     }
 </script>

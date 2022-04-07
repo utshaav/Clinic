@@ -1,0 +1,51 @@
+﻿@model ClinicManagement.Core.ViewModel.SearchViewModel
+@{
+    ViewBag.Title = "SearchDoctor";
+}
+
+<h2>Search Doctor</h2>
+
+@if (Model != null && Model.RecommendedDoctors.Count > 0)
+{
+    <h3>Recommended Doctors</h3>
+    <div class="row">
+        @foreach (var item in Model.RecommendedDoctors)
+        {
+
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text">@item.Specialization.Name</p>
+                        <a href="#" class="btn btn-primary">Book Appointment</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else if (true)
+{
+    <p>There is no __________ doctor available</p>
+}
+
+@if (Model != null && Model.AllDoctors.Count > 0)
+{
+    <h3>All Doctors</h3>
+    <div class="row">
+        @foreach (var item in Model.AllDoctors)
+        {
+
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text">@item.Specialization.Name</p>
+                        <a href="#" class="btn btn-primary">Book Appointment</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+

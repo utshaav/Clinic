@@ -48,6 +48,14 @@ namespace ClinicManagement.Persistence.Repositories
                 .SingleOrDefault(d => d.Id == id);
         }
 
+        public List<Doctor> GetDoctorBySpecialization(string specialization)
+        {
+            return _context.Doctors
+                .Include(s => s.Specialization)
+                .Include(u => u.Physician)
+                .Where(d => d.Specialization.Name.ToLower() == specialization.ToLower()).ToList();
+        }
+
         public Doctor GetProfile(string userId)
         {
             return _context.Doctors

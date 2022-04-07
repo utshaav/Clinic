@@ -10,5 +10,6 @@ namespace ClinicManagement.Core.Repositories
         Doctor GetDoctor(int id);
         Doctor GetProfile(string userId);
         void Add(Doctor doctor);
+        List<Doctor> GetDoctorBySpecialization(string specialization);
     }
 }

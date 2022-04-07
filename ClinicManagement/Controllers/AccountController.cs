@@ -288,13 +288,13 @@ namespace ClinicManagement.Controllers
                     //Mapper.Map<DoctorFormViewModel, Doctor>(model, doctor);
                     _unitOfWork.Patients.Add(patient);
                     _unitOfWork.Complete();
-                    return RedirectToAction("Index", "Doctors");
+                    return RedirectToAction("Index", "Home");
                 }
 
                 this.AddErrors(result);
             }
             // If we got this far, something failed, redisplay form
-            return View("DoctorForm", viewModel);
+            return View("PatientForm", viewModel);
         }
 
         //list users
